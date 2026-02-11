@@ -12,8 +12,7 @@ public class Material {
     public Material() {
     }
 
-    public Material(Integer idMaterial, String nombreMaterial) {
-        this.idMaterial = idMaterial;
+    public Material(String nombreMaterial) {
         this.nombreMaterial = nombreMaterial;
     }
 

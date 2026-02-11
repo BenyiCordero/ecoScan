@@ -15,8 +15,7 @@ public class Recicladora {
     public Recicladora() {
     }
 
-    public Recicladora(Integer idRecicladora, String nombreRecicladora, String direccion, Double latitud, Double longitud) {
-        this.idRecicladora = idRecicladora;
+    public Recicladora(String nombreRecicladora, String direccion, Double latitud, Double longitud) {
         this.nombreRecicladora = nombreRecicladora;
         this.direccion = direccion;
         this.latitud = latitud;
