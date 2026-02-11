@@ -1,4 +1,4 @@
-package ecoscan.model;
+package ecoscan.model.dto;
 
 /**
  *

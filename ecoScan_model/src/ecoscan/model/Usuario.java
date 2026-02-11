@@ -17,8 +17,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario, String nombre, String primerApellido, String segundoApellido, Rol rol, String email, String password) {
-        this.idUsuario = idUsuario;
+    public Usuario(String nombre, String primerApellido, String segundoApellido, Rol rol, String email, String password) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
