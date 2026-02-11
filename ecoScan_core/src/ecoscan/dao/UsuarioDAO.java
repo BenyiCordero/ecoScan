@@ -16,8 +16,8 @@ public class UsuarioDAO {
     public void register (Usuario usuario)throws Exception {
         Connection conn = ConexionMySQL.open();
         
-        String sql = "INSER INTO usuario"
-                + "nombre_usuario, primer_apellido, segundo_apellido, rol, email, password"
+        String sql = "INSERT INTO usuario "
+                + "(nombre_usuario, primer_apellido, segundo_apellido, rol, email, password) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         
         PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
