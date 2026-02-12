@@ -2,6 +2,8 @@ package ecoScan.rest;
 
 import ecoscan.controller.UsuarioController;
 import ecoscan.model.dto.LoginRequest;
+import ecoscan.model.dto.LoginResponse;
+import ecoscan.model.dto.MessageResponse;
 import ecoscan.model.dto.RegisterRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -30,10 +32,10 @@ public class RESTUsuario {
     public Response register(RegisterRequest registerRequest) {
         try {
             String resultado = controller.register(registerRequest);
-            return Response.ok(resultado).build();
+            return Response.ok(new MessageResponse(resultado)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(new MessageResponse(e.getMessage()))
                     .build();
         }
     }
@@ -46,10 +48,10 @@ public class RESTUsuario {
     public Response login(LoginRequest loginRequest){
         try {
             String token = controller.login(loginRequest);
-            return Response.ok(token).build();
+            return Response.ok(new LoginResponse(token)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity(e.getMessage())
+                    .entity(new MessageResponse(e.getMessage()))
                     .build();
         }
     }
