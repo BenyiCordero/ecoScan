@@ -14,8 +14,9 @@ import ecoscan.security.PasswordUtil;
  */
 public class UsuarioController {
     
+    private static UsuarioDAO dao = new UsuarioDAO();
+    
     public String register (RegisterRequest registerRequest) throws Exception {
-        UsuarioDAO dao = new UsuarioDAO();
         
         if(dao.findByEmail(registerRequest.email()) != null){
             throw new Exception("El usuario ya existe");
@@ -36,7 +37,6 @@ public class UsuarioController {
     }
     
     public String login(LoginRequest loginRequest) throws Exception {
-        UsuarioDAO dao = new UsuarioDAO();
         
         Usuario usuario = dao.findByEmail(loginRequest.email());
         
@@ -53,6 +53,16 @@ public class UsuarioController {
                 usuario.getEmail(),
                 usuario.getRol()
         );
+    }
+    
+    public Usuario getByEmail(String email) throws Exception {
+        Usuario usuario = dao.findByEmail(email);
+        
+        if(usuario == null){
+            throw new Exception("Usuario no encontrado");
+        }
+        
+        return usuario;
     }
     
 }
