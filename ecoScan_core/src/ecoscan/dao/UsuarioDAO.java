@@ -2,7 +2,7 @@ package ecoscan.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import ecoscan.db.ConexionMySQL;
+import ecoscan.db.ConexionSQL;
 import ecoscan.model.Usuario;
 import java.sql.ResultSet;
 import ecoscan.model.Rol;
@@ -14,7 +14,7 @@ import ecoscan.model.Rol;
 public class UsuarioDAO {
         
     public void register (Usuario usuario)throws Exception {
-        Connection conn = ConexionMySQL.open();
+        Connection conn = ConexionSQL.open();
         
         String sql = "INSERT INTO usuario "
                 + "(nombre_usuario, primer_apellido, segundo_apellido, rol, email, password) "
@@ -32,11 +32,11 @@ public class UsuarioDAO {
         ps.executeUpdate();
         
         ps.close();
-        ConexionMySQL.close();
+        ConexionSQL.close();
     }
     
     public Usuario findByEmail(String email) throws Exception {
-        Connection conn = (Connection) ConexionMySQL.open();
+        Connection conn = ConexionSQL.open();
         
         String sql = "SELECT * FROM usuario WHERE email = ?";
         
@@ -59,7 +59,7 @@ public class UsuarioDAO {
         
         rs.close();
         ps.close();
-        ConexionMySQL.close();
+        ConexionSQL.close();
         
         return usuario;
     }
