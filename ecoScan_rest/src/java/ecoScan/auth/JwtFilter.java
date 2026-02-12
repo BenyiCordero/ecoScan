@@ -21,6 +21,10 @@ public class JwtFilter implements ContainerRequestFilter{
 
     @Override
     public void filter(ContainerRequestContext crc) throws IOException {
+        if("OPTIONS".equalsIgnoreCase(crc.getMethod())){
+            return;
+        }
+        
         String path = crc.getUriInfo().getPath();
         
         if(path.contains("usuario/login") || path.contains("usuario/register")){

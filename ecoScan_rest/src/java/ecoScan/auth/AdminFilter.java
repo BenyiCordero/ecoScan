@@ -20,6 +20,10 @@ public class AdminFilter implements ContainerRequestFilter{
 
     @Override
     public void filter(ContainerRequestContext crc) throws IOException {
+        if ("OPTIONS".equalsIgnoreCase(crc.getMethod())) {
+            return;
+        }
+        
         String rol = (String) crc.getProperty("rol");
         
         if(rol == null || !rol.equals("ADMINISTRADOR")){
