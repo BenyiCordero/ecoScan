@@ -53,6 +53,8 @@ public class UsuarioDAO {
             usuario.setIdUsuario(rs.getInt("id_usuario"));
             usuario.setEmail(rs.getString("email"));
             usuario.setNombre(rs.getString("nombre_usuario"));
+            usuario.setPrimerApellido(rs.getString("primer_apellido"));
+            usuario.setSegundoApellido(rs.getString("segundo_apellido"));
             usuario.setPassword(rs.getString("password"));
             usuario.setRol(Rol.valueOf(rs.getString("rol")));
         }
