@@ -11,6 +11,7 @@ public class Recicladora {
     private String direccion;
     private Double latitud;
     private Double longitud;
+    private Boolean activa;
 
     public Recicladora() {
     }
@@ -20,6 +21,7 @@ public class Recicladora {
         this.direccion = direccion;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.activa = true;
     }
 
     public Integer getIdRecicladora() {
@@ -60,6 +62,14 @@ public class Recicladora {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
+    }
+
+    public Boolean getActiva() {
+        return activa;
+    }
+
+    public void setActiva(Boolean activa) {
+        this.activa = activa;
     }
     
 }
