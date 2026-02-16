@@ -65,4 +65,8 @@ public class UsuarioController {
         return usuario;
     }
     
+    public void updateUsuario(Usuario usuario) throws Exception{
+        dao.updateUsuario(usuario);
+    }
+    
 }
