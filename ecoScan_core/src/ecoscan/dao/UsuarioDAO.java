@@ -35,6 +35,33 @@ public class UsuarioDAO {
         ConexionSQL.close();
     }
     
+    public void updateUsuario (Usuario usuario) throws Exception{
+        Connection conn = ConexionSQL.open();
+        
+        String sql = "UPDATE usuario SET "
+                + "nombre_usuario = ? ,"
+                + "primer_apellido = ? ,"
+                + "segundo_apellido = ? "
+                + "WHERE id_usuario = ?";
+        
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setString(1, usuario.getNombre());        
+        ps.setString(2, usuario.getPrimerApellido());
+        ps.setString(3, usuario.getSegundoApellido());
+        ps.setInt(4, usuario.getIdUsuario());
+        
+        int rows = ps.executeUpdate();
+        
+        if(rows == 0){
+            throw new Exception("No se encontro el usuario para actualizar");
+        }
+        
+        ps.close();
+        ConexionSQL.close();
+        
+    }
+    
     public Usuario findByEmail(String email) throws Exception {
         Connection conn = ConexionSQL.open();
         
