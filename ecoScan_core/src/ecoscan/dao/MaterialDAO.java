@@ -17,7 +17,7 @@ import java.util.List;
 public class MaterialDAO {
     
     // dar de alta el material
-    public void register(Material material) throws Exception {
+    public void createMaterial(Material material) throws Exception {
         Connection conn = ConexionSQL.open();
         
         String sql = "INSERT INTO material (nombre_material) VALUES (?)";
