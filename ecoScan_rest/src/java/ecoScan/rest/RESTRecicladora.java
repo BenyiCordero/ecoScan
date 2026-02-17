@@ -1,4 +1,4 @@
-package ecoscan.rest;
+package ecoScan.rest;
 
 import ecoscan.controller.RecicladoraController;
 import ecoscan.model.dto.HorarioRequest;
