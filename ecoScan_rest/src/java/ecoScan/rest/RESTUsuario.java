@@ -1,6 +1,5 @@
 package ecoScan.rest;
 
-import ecoScan.auth.AdminOnly;
 import ecoscan.controller.UsuarioController;
 import ecoscan.model.Usuario;
 import ecoscan.model.dto.LoginRequest;
@@ -8,9 +7,11 @@ import ecoscan.model.dto.LoginResponse;
 import ecoscan.model.dto.MessageResponse;
 import ecoscan.model.dto.RegisterRequest;
 import ecoscan.model.dto.UsuarioResponse;
+import ecoscan.model.dto.UsuarioUpdateRequest;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
@@ -67,7 +68,6 @@ public class RESTUsuario {
     * Metodo para retornar a un usuario mediante el email
     */
     @GET
-    @AdminOnly
     @Path("getbyemail")
     public Response getByEmail(@QueryParam("email") String email){
         try {
@@ -79,12 +79,39 @@ public class RESTUsuario {
             
             Usuario usuario = controller.getByEmail(email);
             return Response.ok(new UsuarioResponse(
+                    usuario.getIdUsuario(),
                     usuario.getEmail(),
                     usuario.getNombre(),
                     usuario.getPrimerApellido(),
                     usuario.getSegundoApellido(),
                     usuario.getRol().name()
             )).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new MessageResponse(e.getMessage()))
+                    .build();
+        }
+    }
+    
+    /*
+    * Metodo para actualizar un usuario
+    */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("update")
+    public Response updateUsuario(UsuarioUpdateRequest usuarioUpdateRequest){
+        try {
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(usuarioUpdateRequest.idUsuario());
+            usuario.setNombre(usuarioUpdateRequest.nombre());
+            usuario.setPrimerApellido(usuarioUpdateRequest.primerApellido());
+            usuario.setSegundoApellido(usuarioUpdateRequest.segundoApellido());
+            controller.updateUsuario(usuario);
+            String out = """
+                         { "message": "Usuario actualizado" }
+                         """;
+            return Response.ok(out).build();
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new MessageResponse(e.getMessage()))

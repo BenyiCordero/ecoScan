@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/emont/Desktop/ecoScanBack/ecoScan/ecoScan_rest/src/java/ecoScan/rest/RESTUsuario.java</file>
+=======
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_rest/src/java/ecoScan/rest/RESTUsuario.java</file>
+>>>>>>> 8fd9693acf38be74c4a4b2879cc029fa1a1da7dc
         </group>
     </open-files>
 </project-private>
