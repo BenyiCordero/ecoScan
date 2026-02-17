@@ -6,6 +6,9 @@ import ecoscan.db.ConexionSQL;
 import ecoscan.model.Usuario;
 import java.sql.ResultSet;
 import ecoscan.model.Rol;
+import java.util.ArrayList;
+import java.sql.Statement;
+import java.util.List;
 
 /**
  *
@@ -91,6 +94,73 @@ public class UsuarioDAO {
         ConexionSQL.close();
         
         return usuario;
+    }
+    
+    public List<Usuario> getAll() throws Exception {
+        List<Usuario> usuarios = new ArrayList<>();
+        
+        Connection conn = ConexionSQL.open();
+        
+        String sql = "SELECT * FROM usuario";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        
+        while (rs.next()) {
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(rs.getInt("id_usuario"));
+            usuario.setNombre(rs.getString("nombre_usuario"));
+            usuario.setPrimerApellido(rs.getString("primer_apellido"));
+            usuario.setSegundoApellido(rs.getString("segundo_apellido"));
+            usuario.setRol(Rol.valueOf(rs.getString("rol")));
+            usuario.setEmail(rs.getString("email"));
+            usuarios.add(usuario);
+        }
+        
+        rs.close();
+        stmt.close();
+        ConexionSQL.close();
+        
+        return usuarios;
+    }
+    
+    public Usuario getById(Integer idUsuario) throws Exception {
+        Usuario usuario = null;
+        Connection conn = ConexionSQL.open();
+        
+        String sql = "SELECT * FROM usuario WHERE id_usuario = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idUsuario);
+        
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            usuario = new Usuario();
+            usuario.setIdUsuario(rs.getInt("id_usuario"));
+            usuario.setNombre(rs.getString("nombre_usuario"));
+            usuario.setPrimerApellido(rs.getString("primer_apellido"));
+            usuario.setSegundoApellido(rs.getString("segundo_apellido"));
+            usuario.setRol(Rol.valueOf(rs.getString("rol")));
+            usuario.setEmail(rs.getString("email"));
+        }
+        
+        rs.close();
+        ps.close();
+        ConexionSQL.close();
+        
+        return usuario;
+    }
+    
+    public void delete(Integer idUsuario) throws Exception {
+        Connection conn = ConexionSQL.open();
+        
+        String sql = "DELETE FROM usuario WHERE id_usuario = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setInt(1, idUsuario);
+        ps.executeUpdate();
+        
+        ps.close();
+        ConexionSQL.close();
     }
     
 }

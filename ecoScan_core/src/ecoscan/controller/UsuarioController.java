@@ -7,6 +7,7 @@ import ecoscan.model.dto.LoginRequest;
 import ecoscan.model.dto.RegisterRequest;
 import ecoscan.security.JwtUtil;
 import ecoscan.security.PasswordUtil;
+import java.util.List;
 
 /**
  *
@@ -67,6 +68,41 @@ public class UsuarioController {
     
     public void updateUsuario(Usuario usuario) throws Exception{
         dao.updateUsuario(usuario);
+    }
+    
+    public List<Usuario> getAll() throws Exception {
+        return dao.getAll();
+    }
+
+    // traer un material por su id
+    public Usuario getById(Integer idUsuario) throws Exception {
+        if (idUsuario == null || idUsuario <= 0) {
+            throw new Exception("ID de usuario inválido");
+        }
+
+        Usuario usuario = dao.getById(idUsuario);
+
+        if (usuario == null) {
+            throw new Exception("Usuario no encontrado");
+        }
+
+        return usuario;
+    }
+    
+    public String delete(Integer idUsuario) throws Exception {
+        if (idUsuario == null || idUsuario <= 0) {
+            throw new Exception("ID de usuario inválido");
+        }
+
+        // verificar que existe
+        Usuario existente = dao.getById(idUsuario);
+        if (existente == null) {
+            throw new Exception("Usuario no encontrado");
+        }
+
+        dao.delete(idUsuario);
+
+        return "Usuario eliminado correctamente";
     }
     
 }
