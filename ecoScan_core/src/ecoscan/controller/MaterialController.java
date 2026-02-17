@@ -2,6 +2,8 @@ package ecoscan.controller;
 
 import ecoscan.dao.MaterialDAO;
 import ecoscan.model.Material;
+import ecoscan.model.dto.MaterialRequest;
+import ecoscan.model.dto.MaterialUpdate;
 import java.util.List;
 /**
  *
@@ -17,16 +19,16 @@ public class MaterialController {
     }
 
     // dar de alta material
-    public String register(String nombreMaterial) throws Exception {
+    public String createMaterial(MaterialRequest materialRequest) throws Exception {
         // validaciones
-        if (nombreMaterial == null || nombreMaterial.trim().isEmpty()) {
+        if (materialRequest.nombreMaterial() == null || materialRequest.nombreMaterial().trim().isEmpty()) {
             throw new Exception("El nombre del material es obligatorio");
         }
 
-        Material material = new Material(nombreMaterial);
-        materialDAO.register(material);
+        Material material = new Material(materialRequest.nombreMaterial());
+        materialDAO.createMaterial(material);
 
-        return "Material registrado correctamente con ID: " + material.getIdMaterial();
+        return "Material registrado correctamente";
     }
 
     // traer todos los materiales
@@ -50,23 +52,23 @@ public class MaterialController {
     }
 
     // actualizar material
-    public String update(Integer idMaterial, String nombreMaterial) throws Exception {
+    public String update(MaterialUpdate materialUpdate) throws Exception {
         // validaciones
-        if (idMaterial == null || idMaterial <= 0) {
+        if (materialUpdate.idMaterial() == null || materialUpdate.idMaterial() <= 0) {
             throw new Exception("ID de material inválido");
         }
-        if (nombreMaterial == null || nombreMaterial.trim().isEmpty()) {
+        if (materialUpdate.nombreMaterial() == null || materialUpdate.nombreMaterial().trim().isEmpty()) {
             throw new Exception("El nombre del material es obligatorio");
         }
 
         // verificar que existe
-        Material existente = materialDAO.getById(idMaterial);
+        Material existente = materialDAO.getById(materialUpdate.idMaterial());
         if (existente == null) {
-            throw new Exception("Material no encontrado con ID: " + idMaterial);
+            throw new Exception("Material no encontrado");
         }
 
         // actualizar
-        existente.setNombreMaterial(nombreMaterial);
+        existente.setNombreMaterial(materialUpdate.nombreMaterial());
         materialDAO.update(existente);
 
         return "Material actualizado correctamente";
@@ -81,7 +83,7 @@ public class MaterialController {
         // verificar que existe
         Material existente = materialDAO.getById(idMaterial);
         if (existente == null) {
-            throw new Exception("Material no encontrado con ID: " + idMaterial);
+            throw new Exception("Material no encontrado");
         }
 
         materialDAO.delete(idMaterial);
