@@ -22,7 +22,7 @@ import jakarta.ws.rs.core.Response;
  *
  * @author emont
  */
-@Path("Recicladora")
+@Path("recicladora")
 public class RESTRecicladora {
 
     private RecicladoraController controller = new RecicladoraController();
@@ -92,7 +92,7 @@ public class RESTRecicladora {
 
     // traer rp por su id
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("byid")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@QueryParam("idRecicladora") Integer id) {
         try {
@@ -127,7 +127,6 @@ public class RESTRecicladora {
 
     // eliminar rp logico (desactivar)
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@QueryParam("idRecicladora") Integer id) {
         try {
@@ -191,14 +190,13 @@ public class RESTRecicladora {
 
     // eliminar material ligado a la recicladora
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("materiales")
-    public Response deleteMaterial(MaterialRecicladoraRequest request) {
+    public Response deleteMaterial(@QueryParam("idRecicladora") Integer idRecicladora, @QueryParam("idMaterial") Integer idMaterial) {
         try {
             String resultado = controller.eliminarMaterial(
-                    request.idRecicladora(),
-                    request.idMaterial()
+                    idRecicladora,
+                    idMaterial
             );
             return Response.ok(new MessageResponse(resultado)).build();
         } catch (Exception e) {
@@ -268,7 +266,6 @@ public class RESTRecicladora {
 
     // eliminar horario
     @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("horarios")
     public Response deleteHorario(@QueryParam("idHorario") Integer idHorario) {
