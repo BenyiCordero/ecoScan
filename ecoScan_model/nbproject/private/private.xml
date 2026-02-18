@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/dto/RegisterRequest.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/Horario.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/DiaSemana.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/dto/MaterialRecicladoraRequest.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/dto/MaterialRequest.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/dto/HorarioUpdate.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_model/src/ecoscan/model/dto/HorarioRequest.java</file>
         </group>
     </open-files>
 </project-private>
