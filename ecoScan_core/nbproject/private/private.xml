@@ -9,6 +9,8 @@
             <file>file:/C:/AppDevelopment/ecoScan/ecoScan_core/src/ecoscan/controller/MaterialController.java</file>
             <file>file:/C:/AppDevelopment/ecoScan/ecoScan_core/src/ecoscan/controller/RecicladoraController.java</file>
             <file>file:/C:/AppDevelopment/ecoScan/ecoScan_core/src/ecoscan/dao/RecicladoraDAO.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_core/src/ecoscan/security/JwtUtil.java</file>
+            <file>file:/C:/AppDevelopment/ecoScan/ecoScan_core/src/ecoscan/db/ConexionSQL.java</file>
         </group>
     </open-files>
 </project-private>
