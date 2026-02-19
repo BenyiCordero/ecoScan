@@ -27,7 +27,15 @@ public class JwtFilter implements ContainerRequestFilter{
         
         String path = crc.getUriInfo().getPath();
         
-        if(path.contains("usuario/login") || path.contains("usuario/register")){
+        if(
+            path.contains("usuario/login") || 
+            path.contains("usuario/register") ||
+            path.contains("recicladora/getall") ||
+            path.contains("recicladora/activas") ||
+            path.contains("recicladora/byid") || 
+            path.contains("recicladora/materiales") ||
+            path.contains("recicladora/horarios")
+        ){
             return;
         }
         
