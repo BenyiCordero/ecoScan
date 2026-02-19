@@ -16,7 +16,7 @@ public class ConexionSQL {
         
         // ruta de conexion a mysql
         String url = "jdbc:mysql://127.0.0.1:3306/ecoscan?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8";
-        String user = "root";
+        String user = "ecoscan";
         String password = "1234";
         
         // registar el driver de mysql
