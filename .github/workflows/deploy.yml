@@ -21,7 +21,9 @@ jobs:
           java-version: '21'
 
       - name: Build with Ant
-        run: ant clean dist
+        run: 
+          cd ecoScan_rest
+          ant clean dist
 
       - name: Copy WAR to server
         uses: appleboy/scp-action@v0.1.7
