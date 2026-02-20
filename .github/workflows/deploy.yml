@@ -34,14 +34,28 @@ jobs:
           source: "ecoScan_rest/dist/ecoScan_rest.war"
           target: "/tmp"
 
-      - name: Deploy on server
+      - name: Deploy on server safely
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            sudo systemctl stop tomcat10
-            sudo rm -rf /var/lib/tomcat10/webapps/ecoScan_rest*
-            sudo mv /tmp/ecoScan_rest.war /var/lib/tomcat10/webapps/
-            sudo systemctl start tomcat10
+            if [ -f /tmp/ecoScan_rest/dist/ecoScan_rest.war ]; then
+              echo "WAR encontrado. Iniciando deploy..."
+
+              sudo systemctl stop tomcat10
+
+              sudo rm -rf /var/lib/tomcat10/webapps/ecoScan_rest*
+
+              sudo mv /tmp/ecoScan_rest/dist/ecoScan_rest.war /var/lib/tomcat10/webapps/ecoScan_rest.war
+
+              sudo chown tomcat:tomcat /var/lib/tomcat10/webapps/ecoScan_rest.war
+
+              sudo systemctl start tomcat10
+
+              echo "Deploy completado correctamente."
+            else
+              echo "ERROR: WAR no encontrado. Cancelando deploy."
+              exit 1
+            fi
