@@ -34,7 +34,8 @@ public class JwtFilter implements ContainerRequestFilter{
             path.contains("recicladora/activas") ||
             path.contains("recicladora/byid") || 
             path.contains("recicladora/materiales") ||
-            path.contains("recicladora/horarios")
+            path.contains("recicladora/horarios") ||
+            path.contains("material/getall")
         ){
             return;
         }
